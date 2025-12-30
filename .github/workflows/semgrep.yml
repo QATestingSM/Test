@@ -20,17 +20,26 @@ jobs:
         run: |
           echo '{
             "version": "2.1.0",
-            "runs": [{
-              "tool": { "driver": { "name": "Semgrep" } },
-              "results": [
-                {
-                  "ruleId": "DUMMY",
-                  "level": "warning",
-                  "message": { "text": "Dummy finding for testing" },
-                  "locations": []
-                }
-              ]
-            }]
+            "runs": [
+              {
+                "tool": { "driver": { "name": "Semgrep" } },
+                "results": [
+                  {
+                    "ruleId": "DUMMY",
+                    "level": "warning",
+                    "message": { "text": "Dummy finding for testing" },
+                    "locations": [
+                      {
+                        "physicalLocation": {
+                          "artifactLocation": { "uri": "README.md" },
+                          "region": { "startLine": 1 }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }' > semgrep.sarif
         
       - name: Run Semgrep
@@ -41,3 +50,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: semgrep.sarif
+        continue-on-error: true
