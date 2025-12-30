@@ -15,9 +15,13 @@ jobs:
       image: semgrep/semgrep
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Prepare empty SARIF
+        run: |
+          echo '{}' > semgrep.sarif
         
       - name: Run Semgrep
-        run: semgrep ci --sarif --output=semgrep.sarif || echo '{}' > semgrep.sarif
+        run: semgrep ci --sarif --output=semgrep.sarif
 
       - name: Upload SARIF
         if: success()
