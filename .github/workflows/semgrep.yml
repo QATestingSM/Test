@@ -24,11 +24,7 @@ jobs:
         run: semgrep ci --sarif --output=semgrep.sarif
 
       - name: Upload SARIF
-        if: success()
-        run: |
-          if [ -f semgrep.sarif ]; then
-            echo "SARIF file exists, uploading..."
-            gh actions upload-sarif --sarif-file semgrep.sarif
-          else
-            echo "No SARIF file, skipping upload."
-          fi
+        if: ${{ always() }}
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
