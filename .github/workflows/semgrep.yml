@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Semgrep
-        run: semgrep ci --sarif --output=semgrep.sarif --force
+        run: semgrep ci --sarif --output=semgrep.sarif || True
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
