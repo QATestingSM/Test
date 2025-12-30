@@ -15,15 +15,12 @@ jobs:
       image: semgrep/semgrep
     steps:
       - uses: actions/checkout@v4
-
-      - name: Create dummy file
-        run: touch dummy.py
         
       - name: Run Semgrep
-        run: semgrep ci --sarif --output=semgrep.sarif || touch semgrep.sarif
+        run: semgrep ci --sarif --output=semgrep.sarif
 
       - name: Upload SARIF
-        if: always()
+        if: ${{ always() && exists('semgrep.sarif') }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: semgrep.sarif
