@@ -20,7 +20,7 @@ jobs:
         run: touch dummy.py
         
       - name: Run Semgrep
-        run: semgrep ci --sarif --output=semgrep.sarif || true
+        run: semgrep ci --sarif --output=semgrep.sarif || touch semgrep.sarif
 
       - name: Upload SARIF
         if: always()
