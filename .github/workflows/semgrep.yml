@@ -20,7 +20,17 @@ jobs:
         run: |
           echo '{
             "version": "2.1.0",
-            "runs": []
+            "runs": [{
+              "tool": { "driver": { "name": "Semgrep" } },
+              "results": [
+                {
+                  "ruleId": "DUMMY",
+                  "level": "warning",
+                  "message": { "text": "Dummy finding for testing" },
+                  "locations": []
+                }
+              ]
+            }]
           }' > semgrep.sarif
         
       - name: Run Semgrep
