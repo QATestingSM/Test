@@ -18,7 +18,10 @@ jobs:
       
       - name: Prepare empty SARIF
         run: |
-          echo '{}' > semgrep.sarif
+          echo '{
+            "version": "2.1.0",
+            "runs": []
+          }' > semgrep.sarif
         
       - name: Run Semgrep
         run: semgrep ci --sarif --output=semgrep.sarif
