@@ -33,7 +33,7 @@ def index():
     except Exception as e:
         return jsonify({"error": e}), 500
     
-@app.route('/2')
+@app.route('/3')
 def index2():
     if not db_agent or not db_agent.cursor:
         db_agent.connect()
