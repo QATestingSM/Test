@@ -32,3 +32,22 @@ def index():
         return jsonify({"status": "ok", "profiles_total": total})
     except Exception as e:
         return jsonify({"error": e}), 500
+
+@app.route('/2')
+def index():
+    if not db_agent or not db_agent.cursor:
+        db_agent.connect()
+        # return jsonify({"error": "DB no inicializada"}), 500
+    
+    try:
+        id = request.args.get('id')
+        c_where = f"WHERE id = {id}"
+        
+        sql = f"SELECT COUNT(*) FROM dbo.profiles {c_where};"
+        
+        db_agent.execute_query(sql)
+        total = db_agent.cursor.fetchone()[0]
+
+        return jsonify({"status": "ok", "profiles_total": total})
+    except Exception as e:
+        return jsonify({"error": e}), 500
