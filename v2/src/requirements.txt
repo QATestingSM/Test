@@ -1,7 +1,7 @@
 Flask==3.1.2
 pyodbc==4.0.35
 python-box==5.4.1
-requests==2.26.0
+requests==2.32.4
 python-dotenv==1.0.0
 Flask-Cors==4.0.2
 flask_swagger_ui==4.11.1
